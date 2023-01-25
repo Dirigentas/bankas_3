@@ -1,23 +1,18 @@
 @extends('layouts.app')
 
+@section('home', 'active')
+
+@section('title', 'Pagrindinis puslapis')
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+<p style="background-image: url('http://localhost/bankas_3/public/background.jpg'); width: 100%; height: calc(100vh - 72px); background-position: center; background-repeat:no-repeat; background-size:cover; background-attachment:fixed; text-align: center; font-size: 80px; color: green; line-height: 200px">
+    Sveiki prisijungę
+</p>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
+@if (session('status'))
+<div class="alert alert-success" role="alert">
+    {{ session('status') }}
 </div>
+@endif
+
 @endsection
