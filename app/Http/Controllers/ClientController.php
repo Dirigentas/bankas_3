@@ -52,15 +52,12 @@ class ClientController extends Controller
             [
             'name' => 'required|alpha|min:4|max:100',
             'surname' => 'required|alpha|min:4|max:100',
-            'personalId' => 'required|numeric|min:11|max:11|unique:clients,personalId',
+            'personalId' => 'required|numeric|min_digits:11|max_digits:11|unique:clients,personalId',
             ],
         [
             'name' => 'Netinkamas vardo formatas',
             'surname' => 'Netinkamas pavardės formatas',
-            'personalId' => 'Toks klientas jau egzistuoja',
-            'personalId.numeric' => 'turi buti skaiciai',
-            'personalId.min:11' => '11',
-            'personalId.max:11' => '12',
+            'personalId.unique' => 'Toks klientas jau egzistuoja',
             'personalId' => 'Netinkamas asmens kodo formatas',
         ]);
 
@@ -130,8 +127,28 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+            'name' => 'required|alpha|min:4|max:100',
+            'surname' => 'required|alpha|min:4|max:100',
+            'personalId' => 'required|numeric|min_digits:11|max_digits:11|unique:clients,personalId',
+            ],
+        [
+            'name' => 'Netinkamas vardo formatas',
+            'surname' => 'Netinkamas pavardės formatas',
+            'personalId.unique' => 'Toks klientas jau egzistuoja',
+            'personalId' => 'Netinkamas asmens kodo formatas',
+        ]);
+
+            if ($validator->fails()) {
+                $request->flash();
+                return redirect()->back()->withErrors($validator);
+            }
+
+
         $client->delete();
 
-        return redirect()->route('clients-index');
+        return redirect()->with('oki', 'Sąskaita sėkmingai ištrinta');
     }
 }
