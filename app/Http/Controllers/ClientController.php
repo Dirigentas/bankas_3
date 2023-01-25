@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Iban;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
@@ -46,6 +47,29 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+            'name' => 'required|alpha|min:4|max:100',
+            'surname' => 'required|alpha|min:4|max:100',
+            'personalId' => 'required|numeric|min:11|max:11|unique:clients,personalId',
+            ],
+        [
+            'name' => 'Netinkamas vardo formatas',
+            'surname' => 'Netinkamas pavardės formatas',
+            'personalId' => 'Toks klientas jau egzistuoja',
+            'personalId.numeric' => 'turi buti skaiciai',
+            'personalId.min:11' => '11',
+            'personalId.max:11' => '12',
+            'personalId' => 'Netinkamas asmens kodo formatas',
+        ]);
+
+            if ($validator->fails()) {
+                $request->flash();
+                return redirect()->back()->withErrors($validator);
+            }
+
+
         $client = new Client;
         $client->name = $request->name;
         $client->surname = $request->surname;
@@ -53,7 +77,7 @@ class ClientController extends Controller
         $client->pep = $request->pep == 'on'? 1 : 0;
         $client->save();
 
-        return redirect()->route('clients-create');
+        return redirect()->route('clients-create')->with('ok', 'Klientas sukurtas sėkmingai');
     }
 
     /**

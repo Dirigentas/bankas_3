@@ -33,13 +33,18 @@
                     @if($iban['client_id'] == $client['id'])
                     <div class="list-group-item col-3">
                         <div>{{ $iban['iban']}}</div>
-                        <a href="{{route('ibans-edit', $client)}}">Pridėti lėšas</a>
-                        <a href="{{route('ibans-edit', $client)}}" class='ms-5'>Nuskaičiuoti lėšas</a>
-                        <form action="{{route('ibans-destroy', $client)}}" method="post">
-                            <button type="submit" class="btn btn-outline-danger">Ištrinti sąskaitą</button>
-                            @csrf
-                            @method('delete')
-                        </form>
+
+                        <div>{{ $iban['amount']}}</div>
+
+                        <div class='row'>
+                            <a href="{{route('ibans-edit', $iban)}}" class='ms-4 col-5 btn btn-outline-primary'>Redaguoti lėšas</a>
+                            <form action="{{route('ibans-destroy', $iban)}}" class='col-6' method="post">
+                                <button type="submit" class="btn btn-outline-danger">Ištrinti sąskaitą</button>
+                                @csrf
+                                @method('delete')
+                            </form>
+
+                        </div>
                     </div>
                     @endif
                     @endforeach

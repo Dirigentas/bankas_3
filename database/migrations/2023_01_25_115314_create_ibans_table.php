@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('ibans', function (Blueprint $table) {
             $table->id();
             $table->string('iban');
+            $table->Decimal('amount', $precision = 10, $scale = 2)->nullable();
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients');
             $table->timestamps();

@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Iban;
 use App\Models\Client;
-// use App\Http\Requests\Request;
-// use App\Http\Requests\Request;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class IbanController extends Controller
 {
@@ -50,6 +49,7 @@ class IbanController extends Controller
         // $iban = Client::find($request->client_id);
         $iban->iban = $request->iban;
         $iban->client_id = $request->client_id;
+        $iban->amount = $request->amount;
         $iban->save();
 
         return redirect()->route('clients-index');     
@@ -89,7 +89,10 @@ class IbanController extends Controller
      */
     public function update(Request $request, Iban $iban)
     {
-        //
+        $iban->amount = $iban->amount + $request->amount;
+        $iban->save();
+
+        return redirect()->back();
     }
 
     /**

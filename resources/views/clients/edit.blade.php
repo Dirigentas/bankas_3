@@ -22,12 +22,6 @@
                     <label class="form-label">Asmens kodas</label>
                     <input type="text" class="form-control" name="personalId" value="{{$client->personalId}}">
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1" id="pep" name="pep" @if($client->pep) checked @endif>
-                    <label class="form-check-label pointer" for="pep">
-                        Politikoje dalyvaujantis asmuo
-                    </label>
-                </div>
                 <button type="submit" class="btn btn-outline-primary mt-4">Išsaugoti</button>
                 @csrf
                 @method('put')

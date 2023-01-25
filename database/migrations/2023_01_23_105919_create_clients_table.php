@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 10);
             $table->string('surname', 10);
-            $table->string('personalId', 10);
+            $table->string('personalId', 11);
             $table->boolean('pep');
             $table->timestamps();
         });
