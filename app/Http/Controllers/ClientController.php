@@ -145,7 +145,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        if (!$client->typeDrinks()->count()) {
+        if (!$client->clientIbans()->count()) {
             $client->delete();
             return redirect()->route('clients-index')->with('okis', 'Klientas ištrintas sėkmingai');
         }
