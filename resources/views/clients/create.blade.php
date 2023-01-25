@@ -30,13 +30,10 @@
                     </label>
                 </div>
                 <button type="submit" class="btn btn-outline-primary mt-4">Sukurti</button>
-
                 @csrf
             </form>
-
         </div>
     </div>
 </div>
-
 
 @endsection

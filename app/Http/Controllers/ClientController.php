@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Iban;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -19,9 +20,11 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::all()->sortBy('surname');
+        $ibans = Iban::all();
 
         return view('clients.index', [
-            'clients' => $clients
+            'clients' => $clients,
+            'ibans' => $ibans,
         ]);
     }
 
