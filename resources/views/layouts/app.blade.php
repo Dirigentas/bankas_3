@@ -36,23 +36,13 @@
                     <ul class="navbar-nav ms-auto">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{route('home')}}">Pagrindinis</a>
+                                <a class="nav-link @yield('home')" href="{{route('home')}}">Pagrindinis</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('clients-index')}}">
-                                    Klientai
-                                    @hasSection('url')
-
-                                    @yield('url')
-                                    <div class="clearfix"></div>
-                                    @endif
-                                </a>
-
-
-                                {{-- @if(old('is_alk')) checked @endif --}}
+                                <a class="nav-link @yield('index')" href="{{route('clients-index')}}">Klientai</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('clients-create')}}">Sukurti klientą</a>
+                                <a class="nav-link @yield('create')" href="{{route('clients-create')}}">Sukurti klientą</a>
                             </li>
 
                             <!-- Authentication Links -->

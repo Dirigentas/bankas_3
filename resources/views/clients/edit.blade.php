@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('edit', 'active')
+
 @section('title', 'Kliento redagavimas')
 
 @section('content')

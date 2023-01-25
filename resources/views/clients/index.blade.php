@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('index')
+@section('index', 'active')
 
 @section('title', 'Klientų sąrašas')
 

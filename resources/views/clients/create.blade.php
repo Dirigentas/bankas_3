@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('create', 'active')
+
 @section('title', 'Sukurti klientą')
 
 @section('content')
