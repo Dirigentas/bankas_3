@@ -110,13 +110,31 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
+            $validator = Validator::make(
+            $request->all(),
+            [
+            'name' => 'required|alpha|min:4|max:100',
+            'surname' => 'required|alpha|min:4|max:100',
+            'personalId' => 'required|numeric|min_digits:11|max_digits:11',
+            ],
+        [
+            'name' => 'Netinkamas vardo formatas',
+            'surname' => 'Netinkamas pavardės formatas',
+            'personalId' => 'Netinkamas asmens kodo formatas',
+        ]);
+
+            if ($validator->fails()) {
+                $request->flash();
+                return redirect()->back()->withErrors($validator);
+            }
+
         $client->name = $request->name;
         $client->surname = $request->surname;
         $client->personalId = $request->personalId;
         $client->pep = $request->pep == 'on'? 1 : 0;
         $client->save();
 
-        return redirect()->route('clients-index');
+        return redirect()->route('clients-index')->with('update', 'Klientas paredaguotas sėkmingai');
     }
 
     /**
@@ -127,28 +145,10 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        $validator = Validator::make(
-            $request->all(),
-            [
-            'name' => 'required|alpha|min:4|max:100',
-            'surname' => 'required|alpha|min:4|max:100',
-            'personalId' => 'required|numeric|min_digits:11|max_digits:11|unique:clients,personalId',
-            ],
-        [
-            'name' => 'Netinkamas vardo formatas',
-            'surname' => 'Netinkamas pavardės formatas',
-            'personalId.unique' => 'Toks klientas jau egzistuoja',
-            'personalId' => 'Netinkamas asmens kodo formatas',
-        ]);
-
-            if ($validator->fails()) {
-                $request->flash();
-                return redirect()->back()->withErrors($validator);
-            }
-
-
-        $client->delete();
-
-        return redirect()->with('oki', 'Sąskaita sėkmingai ištrinta');
+        if (!$client->typeDrinks()->count()) {
+            $client->delete();
+            return redirect()->route('clients-index')->with('okis', 'Klientas ištrintas sėkmingai');
+        }
+        return redirect()->route('clients-index')->with('nokis', 'Klientas turi sąskaitų');
     }
 }

@@ -52,7 +52,7 @@ class IbanController extends Controller
         $iban->amount = $request->amount;
         $iban->save();
 
-        return redirect()->route('clients-index');     
+        return redirect()->route('clients-index')->with('upi', 'Kliento sąskaita sėkmingai pridėta');     
     }
 
     /**
@@ -74,8 +74,11 @@ class IbanController extends Controller
      */
     public function edit(Iban $iban)
     {
+        $amount = $iban->amount;
+        
         return view('ibans.edit', [
-            'iban' => $iban
+            'iban' => $iban,
+            'amount' => $amount
         ]);
     }
 
@@ -89,10 +92,16 @@ class IbanController extends Controller
      */
     public function update(Request $request, Iban $iban)
     {
-        $iban->amount = $iban->amount + $request->amount;
-        $iban->save();
+        if ($iban->amount + $request->amount < 0) {
+            return redirect()->back()->with('bad', 'Kliento lėšų likutis negali likti neigiamas');
+        }
+        else {
+            $iban->amount = $iban->amount + $request->amount;
+            $iban->save();
+    
+            return redirect()->back()->with('lesos', 'Kliento lėšos sėkmingai paredaguotos');
+        }
 
-        return redirect()->back();
     }
 
     /**
@@ -103,8 +112,15 @@ class IbanController extends Controller
      */
     public function destroy(Iban $iban)
     {
-        $iban->delete();
+        
 
-        return redirect()->route('clients-index');
+        if ($iban->amount != 0) {
+            return redirect()->back()->with('not', 'Sąskaita nėra tuščia');
+        }
+        else {
+            $iban->delete();
+            return redirect()->route('clients-index')->with('oki', 'Sąskaita sėkmingai ištrinta');
+        }
+
     }
 }
