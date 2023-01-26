@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class="container col-md-7 ">
+<div class="container col-md-7 mt-5 pt-5">
     <div class="card">
         <h2 class="card-header">Sukurti klientą</h2>
         <div class="card-body">
@@ -19,6 +19,8 @@
                     <label class="form-label">Pavardė</label>
                     <input type="text" name='surname' class="form-control" value="{{old('surname')}}">
                 </div>
+                {{-- {{var_dump($errors)}}
+                {{dump($errors)}} --}}
                 <div class="mb-3">
                     <label class="form-label">Asmens kodas</label>
                     <input type="code" name='personalId' class="form-control" value="{{old('personalId')}}">

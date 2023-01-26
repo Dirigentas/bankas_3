@@ -92,15 +92,34 @@ class IbanController extends Controller
      */
     public function update(Request $request, Iban $iban)
     {
-        if ($iban->amount + $request->amount < 0) {
-            return redirect()->back()->with('bad', 'Kliento lėšų likutis negali likti neigiamas');
+        // dump($request->type);
+        // dump($request->type == 1);
+        // dump($request->amount);
+        if($request->amount <=0) {
+            $request->flash();
+            
+            return redirect()->back()->with('bidis', 'Turi būti įvesta teigiama reikšmė');
         }
-        else {
+
+        if(!$request->type) {
             $iban->amount = $iban->amount + $request->amount;
             $iban->save();
-    
-            return redirect()->back()->with('lesos', 'Kliento lėšos sėkmingai paredaguotos');
+        
+            return redirect()->back()->with('lesos', 'Kliento lėšos sėkmingai paredaguotos');  
         }
+        else {
+            if ($iban->amount - $request->amount < 0) {
+                $request->flash();
+                return redirect()->back()->with('bad', 'Kliento lėšų likutis negali likti neigiamas');
+            }
+            else {
+                $iban->amount = $iban->amount - $request->amount;
+                $iban->save();
+        
+                return redirect()->back()->with('lesos', 'Kliento lėšos sėkmingai paredaguotos');
+            }
+        }
+
 
     }
 

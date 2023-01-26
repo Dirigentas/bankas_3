@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class="container text-center">
+<div class="container text-center pt-5">
     @foreach ($clients as $client)
     <div class="card mt-5">
         <div class="card-header">

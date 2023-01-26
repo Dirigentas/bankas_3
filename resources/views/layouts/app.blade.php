@@ -19,9 +19,9 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{route('home')}}"> Bankas_3 </a>
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
+            <div class="container-fluid bg-info bg-gradient">
+                <a class="fw-bold navbar-brand" href="{{route('home')}}"> Bankas_3 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -54,17 +54,17 @@
                             @else
 
                             <li class="nav-item">
-                                <a class="nav-link @yield('home')" href="{{route('home')}}">Pagrindinis</a>
+                                <a class="text-dark fw-bold nav-link @yield('home')" href="{{route('home')}}">Pagrindinis</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @yield('index')" href="{{route('clients-index')}}">Klientai</a>
+                                <a class="text-dark fw-bold nav-link @yield('index')" href="{{route('clients-index')}}">Klientai</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link @yield('create')" href="{{route('clients-create')}}">Sukurti klientą</a>
+                                <a class="text-dark fw-bold nav-link @yield('create')" href="{{route('clients-create')}}">Sukurti klientą</a>
                             </li>
 
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="fw-bold text-dark nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 

@@ -20,7 +20,10 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all()->sortBy('surname');
+        $clients = Client::all()->sortBy('surname')->sortBy('name');
+
+        // sortBy('c')->sortBy('b')->sortBy('a');
+        
         $ibans = Iban::all();
 
         return view('clients.index', [
@@ -50,8 +53,8 @@ class ClientController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-            'name' => 'required|alpha|min:4|max:100',
-            'surname' => 'required|alpha|min:4|max:100',
+            'name' => 'required|alpha|min:4|max:10',
+            'surname' => 'required|alpha|min:4|max:10',
             'personalId' => 'required|numeric|min_digits:11|max_digits:11|unique:clients,personalId',
             ],
         [
@@ -113,8 +116,8 @@ class ClientController extends Controller
             $validator = Validator::make(
             $request->all(),
             [
-            'name' => 'required|alpha|min:4|max:100',
-            'surname' => 'required|alpha|min:4|max:100',
+            'name' => 'required|alpha|min:4|max:10',
+            'surname' => 'required|alpha|min:4|max:10',
             'personalId' => 'required|numeric|min_digits:11|max_digits:11',
             ],
         [

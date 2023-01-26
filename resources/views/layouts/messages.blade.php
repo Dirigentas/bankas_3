@@ -37,6 +37,13 @@
             </h3>
             @endif
 
+            @if(Session::has('bidis'))
+            <h3 class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ Session::get('bidis') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </h3>
+            @endif
+
             @if(Session::has('update'))
             <h3 class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ Session::get('update') }}
