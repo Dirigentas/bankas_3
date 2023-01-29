@@ -6,7 +6,7 @@
 
 @section('content')
 <div class='container-fluid'>
-    <p class='px-5' style="background-image: url('http://localhost/bankas_3/public/background.jpg'); width: 100%; height: calc(100vh - 18px); background-position: center; background-repeat:no-repeat; background-size:cover; background-attachment:fixed; text-align: center; font-size: 80px; color: green; line-height: 200px">
+    <p class='px-5 rounded' style="background-image: url('http://localhost/bankas_3/public/background.jpg'); width: 100%; height: calc(100vh - 112px); background-position: center; background-repeat:no-repeat; background-size:cover; background-attachment:fixed; text-align: center; font-size: 80px; color: green; line-height: 200px">
         Sveiki prisijungę
     </p>
 </div>

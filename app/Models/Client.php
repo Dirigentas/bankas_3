@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Client extends Model  
 {
     use HasFactory;
 
     public function clientIbans()
     {
-        return $this->hasMany(Iban::class, 'client_id', 'id');
+        return $this->hasMany(Iban::class);
     }
 }

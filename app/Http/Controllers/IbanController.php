@@ -28,7 +28,7 @@ class IbanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($client)
+    public function create(Client $client)
     {
         $randomIban = 'LT'. rand(10, 99) . ' 7044 0' . rand(100, 999) . ' ' . rand(1000, 9999) . ' ' . rand(1000, 9999);
         $client = $client;

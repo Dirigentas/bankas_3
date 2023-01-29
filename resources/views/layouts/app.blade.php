@@ -20,8 +20,10 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
-            <div class="container-fluid bg-info bg-gradient">
-                <a class="fw-bold navbar-brand" href="{{route('home')}}"> Bankas_3 </a>
+            <div class="container-fluid">
+                <a class="fw-bold navbar-brand" href="{{route('home')}}">
+                    <img class="logo ms-5" src="{{asset('img/logo.jpg')}}" alt="logo">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -34,7 +36,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs me-5">
 
 
                             <!-- Authentication Links -->

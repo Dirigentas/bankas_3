@@ -13,14 +13,11 @@
                     <input type="text" class="form-control" name="amount" @if(Session::has('bad') || Session::has('bidis')) value="{{old('amount')}}" @else value='0.00' @endif>
 
                     <div class="mt-3">
-                        <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name='type'>
+                        <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name='type' @if(($errors && old('type'))) checked @endif>
                         <label class="form-check-label" for="flexCheckDefault">
                             Lėšų nuėmimas
                         </label>
                     </div>
-
-
-
                     <button type="submit" class="btn btn-outline-primary mt-4">Išsaugoti</button>
                     @csrf
                     @method('put')
