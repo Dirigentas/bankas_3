@@ -19,7 +19,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top shadow-lg">
             <div class="container-fluid">
                 <a class="fw-bold navbar-brand" href="{{route('home')}}">
                     <img class="logo ms-5" src="{{asset('img/logo.jpg')}}" alt="logo">
@@ -36,9 +36,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <ul class="nav nav-tabs me-5">
-
-
+                        <ul class="nav nav-tabs me-5 shadow">
                             <!-- Authentication Links -->
                             @guest
                             @if (Route::has('login'))

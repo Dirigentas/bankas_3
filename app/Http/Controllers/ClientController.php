@@ -18,17 +18,44 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clients = Client::all()->sortBy('surname')->sortBy('name');
+        // $perPageShow = in_array($request->per_page, Client::PER_PAGE) ? $request->per_page : 'all';
 
-        // sortBy('c')->sortBy('b')->sortBy('a');
+        if (!$request->s) {
+            // sortBy('c')->sortBy('b')->sortBy('a');
+            $clients = Client::all()->sortBy('surname')->sortBy('name');
+
+            // if ($perPageShow == 'all') {
+            //     $clients = $clients->get();
+            // } else {
+            //     $clients = $clients->paginate($perPageShow)->withQueryString();
+            // }
+        }
+        else {
+            $s = explode(' ', $request->s);
+            
+            //vieno zodzio paieska
+            if(count($s) == 1) {
+                $clients = Client::where('surname', 'like', '%'.$s[0].'%')->get();
+            }
+            //dvieju zodziu paieska
+            else {
+                $clients = Client::where('surname', 'like', '%'.$s[0].'%'.$s[1])
+                ->orWhere('surname', 'like', '%'.$s[1].'%'.$s[0])->get();
+            }
+
+        }
+
         
         $ibans = Iban::all();
 
         return view('clients.index', [
             'clients' => $clients,
             'ibans' => $ibans,
+            'perPageSelect' => Client::PER_PAGE,
+            's' => $request->s ?? '',
+            // 'perPageShow' => $perPageShow,
         ]);
     }
 
