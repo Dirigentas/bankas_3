@@ -22,19 +22,30 @@ class ClientController extends Controller
     {
         $perPageShow = in_array($request->per_page, Client::PER_PAGE) ? $request->per_page : 'visi';
 
-        $clients = Client::where('id', '>', 0); //tik uzklausos formavimas
-
-        // $clients = $clients->orderBy('surname')->orderBy('name'); //tik uzklausos formavimas
-
-        $clients = match($request->sort ?? '') {
-            'asc_name' => $clients->orderBy('name'),
-            'desc_name' => $clients->orderBy('name', 'desc'),
-            'asc_surname' => $clients->orderBy('surname'),
-            'desc_surname' => $clients->orderBy('surname', 'desc'),
-            default => $clients
-        }; //tik uzklausos formavimas
-
         if (!$request->s) {
+
+            
+            //filtravimas neveikia, nes neturint duomenu, negalim ju atfiltruoti, cia reiktu join'inti lenteles, kolkas dar per anksti
+            // if (!$client->clientIbans()->count()) {}
+            // $clients = match($request->iban_number ?? '') {
+            //     '0' => Client::where('id', '>', 0),
+            //     '1' => Client::where('id', '>', 10),
+            //     '2' => Client::where('id', '>', 0),
+            //     '>=3' => Client::where('id', '>', 0),
+            //     default => Client::where('id', '>', 0),
+            // }; //tik uzklausos formavimas
+        
+            $clients = Client::where('id', '>', 0); //tik uzklausos formavimas
+
+            // $clients = $clients->orderBy('surname')->orderBy('name'); //tik uzklausos formavimas
+
+            $clients = match($request->sort ?? '') {
+                'asc_name' => $clients->orderBy('name'),
+                'desc_name' => $clients->orderBy('name', 'desc'),
+                'asc_surname' => $clients->orderBy('surname'),
+                'desc_surname' => $clients->orderBy('surname', 'desc'),
+                default => $clients
+            }; //tik uzklausos formavimas
 
             if ($perPageShow == 'visi') {
                 $clients = $clients->get(); //duomenu gavimas
@@ -68,6 +79,8 @@ class ClientController extends Controller
             's' => $request->s ?? '',
             'perPageSelect' => Client::PER_PAGE,
             'perPageShow' => $perPageShow,
+            'filterSelect' => Client::FILTER,
+            'filterShow' => isset(Client::FILTER[$request->iban_number]) ? $request->iban_number : ''
         ]);
     }
 

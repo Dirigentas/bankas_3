@@ -39,14 +39,27 @@
                         </div>
                     </div>
 
-                    <div class='row'>
-                        <button type="submit" class="col-2 ms-4 mt-2 btn btn-outline-success">Rodyti</button>
-                    </div>
-                </form>
-
+                    {{-- <div class="col-3">
+                        <div class="mb-3">
+                            <label class="form-label">Filtravimas</label>
+                            <select class="form-select" name="iban_number">
+                                <option value="all">visi</option>
+                                @foreach($filterSelect as $value =>$filter)
+                                <option value="{{$value}}" @if($filterShow==$value) selected @endif>{{$filter}}</option>
+                    @endforeach
+                    </select>
             </div>
+        </div> --}}
+
+
+        <div class='row'>
+            <button type="submit" class="col-2 ms-4 mt-2 btn btn-outline-success">Rodyti</button>
         </div>
+        </form>
+
     </div>
+</div>
+</div>
 </div>
 
 <div class="container text-center">

@@ -20,6 +20,13 @@ class Client extends Model
         'desc_surname' => 'pavarde Z-A'
     ];
 
+    const FILTER = [
+        '0' => '0',
+        '1' => '1',
+        '2' => '2',
+        '>=3' => '>=3'
+    ];
+
     public function clientIbans()
     {
         return $this->hasMany(Iban::class);
