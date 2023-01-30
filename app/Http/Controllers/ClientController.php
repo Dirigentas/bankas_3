@@ -23,8 +23,7 @@ class ClientController extends Controller
         // $perPageShow = in_array($request->per_page, Client::PER_PAGE) ? $request->per_page : 'all';
 
         if (!$request->s) {
-            // sortBy('c')->sortBy('b')->sortBy('a');
-            $clients = Client::all()->sortBy('surname')->sortBy('name');
+            $clients = Client::all()->sortBy('name')->sortBy('surname');
 
             // if ($perPageShow == 'all') {
             //     $clients = $clients->get();
