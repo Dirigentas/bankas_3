@@ -73,11 +73,13 @@
                 <div class='col'>
                     <a href="{{route('clients-edit', $client)}}" class="btn btn-primary">Redaguoti klientą</a>
                 </div>
+                @if(Auth::user()?->role == 'admin')
                 <form class='col' action="{{route('clients-destroy', $client)}}" method="post">
                     <button type="submit" class="btn btn-danger">Ištrinti klientą</button>
                     @csrf
                     @method('delete')
                 </form>
+                @endif
             </div>
         </div>
 
@@ -92,12 +94,13 @@
                         <div>{{ $iban['amount']}}</div>
                         <div class='row'>
                             <a href="{{route('ibans-edit', $iban)}}" class='ms-4 col-5 btn btn-outline-primary'>Redaguoti lėšas</a>
+                            @if(Auth::user()?->role == 'admin')
                             <form action="{{route('ibans-destroy', $iban)}}" class='col-6' method="post">
                                 <button type="submit" class="btn btn-outline-danger">Ištrinti sąskaitą</button>
                                 @csrf
                                 @method('delete')
                             </form>
-
+                            @endif
                         </div>
                     </div>
                     @endif

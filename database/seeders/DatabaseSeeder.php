@@ -20,7 +20,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'Aras',
             'email' => 'a@a',
             'password' => Hash::make('123'),
-            // 'role' => 'manager'
+            'role' => 'admin'
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Marius',
+            'email' => 'm@m',
+            'password' => Hash::make('123'),
+            'role' => 'manager'
         ]);
 
         $faker = Faker::create();
