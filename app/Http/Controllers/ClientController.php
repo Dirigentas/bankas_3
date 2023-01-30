@@ -20,15 +20,23 @@ class ClientController extends Controller
      */
     public function index(Request $request)
     {
-        $perPageShow = in_array($request->per_page, Client::PER_PAGE) ? $request->per_page : 'all';
+        $perPageShow = in_array($request->per_page, Client::PER_PAGE) ? $request->per_page : 'visi';
 
         $clients = Client::where('id', '>', 0); //tik uzklausos formavimas
 
-        $clients = $clients->orderBy('surname')->orderBy('name'); //tik uzklausos formavimas
-        
+        // $clients = $clients->orderBy('surname')->orderBy('name'); //tik uzklausos formavimas
+
+        $clients = match($request->sort ?? '') {
+            'asc_name' => $clients->orderBy('name'),
+            'desc_name' => $clients->orderBy('name', 'desc'),
+            'asc_surname' => $clients->orderBy('surname'),
+            'desc_surname' => $clients->orderBy('surname', 'desc'),
+            default => $clients
+        }; //tik uzklausos formavimas
+
         if (!$request->s) {
 
-            if ($perPageShow == 'all') {
+            if ($perPageShow == 'visi') {
                 $clients = $clients->get(); //duomenu gavimas
             } else {
                 $clients = $clients->paginate($perPageShow)->withQueryString(); //duomenu gavimas
@@ -54,6 +62,8 @@ class ClientController extends Controller
 
         return view('clients.index', [
             'clients' => $clients,
+            'sortSelect' => Client::SORT,
+            'sortShow' => isset(Client::SORT[$request->sort]) ? $request->sort : '',
             'ibans' => $ibans,
             's' => $request->s ?? '',
             'perPageSelect' => Client::PER_PAGE,

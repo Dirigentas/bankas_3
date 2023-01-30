@@ -10,7 +10,14 @@ class Client extends Model
     use HasFactory;
 
     const PER_PAGE = [
-        'all', 5, 10, 15, 20
+        'visi', 3, 5, 10, 20
+    ];
+
+    const SORT = [
+        'asc_name' => 'vardas A-Z',
+        'desc_name' => 'vardas Z-A',
+        'asc_surname' => 'pavarde A-Z',
+        'desc_surname' => 'pavarde Z-A'
     ];
 
     public function clientIbans()

@@ -18,14 +18,30 @@
                     <a href='{{route('clients-index')}}' class='mt-2 ms-2 btn btn-outline-warning'>Išvalyti</a>
                 </form>
 
-                <form class='col-3' action="{{route('clients-index')}}" method='get'>
-                    <label for="per_page" class="form-label">Puslapiavimas</label>
-                    <select id="per_page" name='per_page' class="form-select">
-                        @foreach($perPageSelect as $value)
-                        <option value="{{$value}}" @if($perPageShow==$value) selected @endif>{{$value}}</option>
-                        @endforeach
-                    </select>
-                    <button type="submit" class="mt-2 btn btn-outline-success">Rodyti</button>
+                <form class='col-6 row' action="{{route('clients-index')}}" method='get'>
+                    <div class="col-2">
+                        <label for="per_page" class="form-label">Puslapiavimas</label>
+                        <select id="per_page" name='per_page' class="form-select">
+                            @foreach($perPageSelect as $value)
+                            <option value="{{$value}}" @if($perPageShow==$value) selected @endif>{{$value}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <div class="mb-3">
+                            <label class="form-label">Rūšiavimas</label>
+                            <select class="form-select" name="sort">
+                                <option></option>
+                                @foreach($sortSelect as $value => $name)
+                                <option value="{{$value}}" @if($sortShow==$value) selected @endif>{{$name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <button type="submit" class="col-2 ms-4 mt-2 btn btn-outline-success">Rodyti</button>
+                    </div>
                 </form>
 
             </div>
@@ -81,7 +97,7 @@
         </div>
     </div>
     @endforeach
-    @if($perPageShow != 'all')
+    @if($perPageShow != 'visi')
     <div class="m-2">{{ $clients->links() }}</div>
     @endif
 
