@@ -18,15 +18,15 @@
                     <a href='{{route('clients-index')}}' class='mt-2 ms-2 btn btn-outline-warning'>Išvalyti</a>
                 </form>
 
-                {{-- <form class='col-3' action="{{route('clients-index')}}" method='get'>
-                <label for="per_page" class="form-label">Puslapiavimas</label>
-                <select type="text" id="per_page" name='per_page' class="form-select">
-                    @foreach($perPageSelect as $value)
-                    <option value="{{$value}}" @if($perPageShow==$value) selected @endif>{{$value}}</option>
-                    @endforeach
-                </select>
-                <button type="submit" class="mt-2 btn btn-outline-success">Rodyti</button>
-                </form> --}}
+                <form class='col-3' action="{{route('clients-index')}}" method='get'>
+                    <label for="per_page" class="form-label">Puslapiavimas</label>
+                    <select id="per_page" name='per_page' class="form-select">
+                        @foreach($perPageSelect as $value)
+                        <option value="{{$value}}" @if($perPageShow==$value) selected @endif>{{$value}}</option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="mt-2 btn btn-outline-success">Rodyti</button>
+                </form>
 
             </div>
         </div>
@@ -75,17 +75,16 @@
                     @endforeach
                 </div>
             </ul>
-
-
-
-
-
             <div class='card-header'>
                 <a href="{{route('ibans-create', $client)}}" class="ms-4 btn btn-outline-primary">Pridėti naują sąskaitą</a>
             </div>
         </div>
     </div>
     @endforeach
+    @if($perPageShow != 'all')
+    <div class="m-2">{{ $clients->links() }}</div>
+    @endif
+
 </div>
 
 @endsection

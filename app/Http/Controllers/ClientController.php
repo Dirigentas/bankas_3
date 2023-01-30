@@ -20,16 +20,19 @@ class ClientController extends Controller
      */
     public function index(Request $request)
     {
-        // $perPageShow = in_array($request->per_page, Client::PER_PAGE) ? $request->per_page : 'all';
+        $perPageShow = in_array($request->per_page, Client::PER_PAGE) ? $request->per_page : 'all';
 
+        $clients = Client::where('id', '>', 0); //tik uzklausos formavimas
+
+        $clients = $clients->orderBy('surname')->orderBy('name'); //tik uzklausos formavimas
+        
         if (!$request->s) {
-            $clients = Client::all()->sortBy('name')->sortBy('surname');
 
-            // if ($perPageShow == 'all') {
-            //     $clients = $clients->get();
-            // } else {
-            //     $clients = $clients->paginate($perPageShow)->withQueryString();
-            // }
+            if ($perPageShow == 'all') {
+                $clients = $clients->get(); //duomenu gavimas
+            } else {
+                $clients = $clients->paginate($perPageShow)->withQueryString(); //duomenu gavimas
+            }
         }
         else {
             $s = explode(' ', $request->s);
@@ -52,9 +55,9 @@ class ClientController extends Controller
         return view('clients.index', [
             'clients' => $clients,
             'ibans' => $ibans,
-            'perPageSelect' => Client::PER_PAGE,
             's' => $request->s ?? '',
-            // 'perPageShow' => $perPageShow,
+            'perPageSelect' => Client::PER_PAGE,
+            'perPageShow' => $perPageShow,
         ]);
     }
 
