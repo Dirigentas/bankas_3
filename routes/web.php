@@ -14,7 +14,6 @@ Route::prefix('/clients')->name('clients-')->group(function () {
 });
 
 Route::prefix('/ibans')->name('ibans-')->group(function () {
-    // Route::get('/index', [I::class, 'index'])->name('index');    
     Route::get('/create/{client}', [I::class, 'create'])->name('create')->middleware('roles:Ad|Ma');
     Route::post('/store', [I::class, 'store'])->name('store')->middleware('roles:Ad|Ma');    
     Route::get('/edit/{iban}', [I::class, 'edit'])->name('edit')->middleware('roles:Ad|Ma');
