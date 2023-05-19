@@ -23,7 +23,7 @@ Route::prefix('/ibans')->name('ibans-')->group(function () {
 });
 
 
-Auth::routes(['register' => false]);
+Auth::routes([]); // optional:'register' => false
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
